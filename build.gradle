@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+}
+
+group 'com.kube'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'org.apache.kafka:kafka-clients:2.8.0'
+    implementation 'org.apache.kafka:kafka-streams:2.8.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.5'
+    implementation 'org.apache.flink:flink-streaming-java:1.16.1'
+    implementation 'org.apache.flink:flink-connector-kafka:1.16.1'
+    implementation 'org.apache.flink:flink-connector-files:1.16.1'
+    implementation 'org.apache.flink:flink-json:1.16.1'
+    implementation 'org.apache.flink:flink-table-api-java:1.16.1'
+    implementation 'org.apache.flink:flink-table-api-java-bridge:1.16.1'
+    implementation 'org.apache.flink:flink-connector-redis_2.11:1.1.5'
+    implementation 'org.apache.flink:flink-table-planner_2.12:1.16.1'
+    implementation 'org.apache.flink:flink-connector-jdbc:1.16.1'
+    implementation 'org.apache.flink:flink-clients:1.16.1'
+    testImplementation 'org.apache.flink:flink-test-utils:1.16.1'
+    implementation 'mysql:mysql-connector-java:8.0.32'
+    implementation 'org.apache.flink:flink-formats:1.16.1'
+    implementation 'org.apache.flink:flink-parquet:1.16.1'
+    implementation 'org.apache.flink:flink-avro:1.16.1'
+    implementation 'org.apache.parquet:parquet-avro:1.13.1'
+    implementation 'org.apache.avro:avro:1.11.2'
+    compileOnly 'org.projectlombok:lombok:1.18.28'
+    implementation 'junit:junit:4.13.2'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.kube.app.kafka.TransactionsProducer'
+    }
+}
+
+
+shadowJar {
+    archiveBaseName.set('transaction-producer')
+    manifest {
+        attributes 'Main-Class': 'com.kube.app.kafka.TransactionsProducer'
+    }
+}
